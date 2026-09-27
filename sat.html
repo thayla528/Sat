@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAT Study Princess ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose-pastel:#f8e1e7;
+  --rose-blush:#f3c9d4;
+  --rose-soft:#fdeef2;
+  --pearl:#fdfaf7;
+  --pearl-warm:#faf5ef;
+  --baby-blue:#cfe3f2;
+  --butterfly-blue:#6aa9d6;
+  --butterfly-deep:#3a78a8;
+  --champagne:#d4b483;
+  --gold:#c9a961;
+  --gold-soft:#e8d4a8;
+  --ink:#3a2a3a;
+  --ink-soft:#5a4a5a;
+  --navy:#2c3e66;
+  --rose-dark:#8a4a5e;
+  --shadow-soft:0 4px 24px rgba(138,74,94,.08);
+  --shadow-med:0 8px 32px rgba(138,74,94,.12);
+  --shadow-gold:0 4px 20px rgba(201,169,97,.18);
+  --border:rgba(201,169,97,.25);
+  --radius:18px;
+  --radius-lg:28px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #fce4ec 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, #e3f0fa 0%, transparent 55%),
+    radial-gradient(800px 600px at 50% 120%, #fdf2e9 0%, transparent 60%),
+    linear-gradient(180deg,#fdfaf7 0%, #faf5ef 100%);
+  min-height:100vh;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;color:var(--ink);letter-spacing:.2px}
+h1{font-weight:600}
+.serif{font-family:'Cormorant Garamond',serif}
+.italic{font-style:italic}
+.gold{color:var(--gold)}
+.rose{color:var(--rose-dark)}
+.navy{color:var(--navy)}
+
+/* ============ BUTTERFLY SVG ============ */
+.butterfly{display:inline-block;vertical-align:middle}
+.butterfly svg{width:100%;height:100%;filter:drop-shadow(0 4px 6px rgba(58,120,168,.25))}
+
+/* ============ LAYOUT ============ */
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.sidebar{
+  background:linear-gradient(180deg,#fff 0%,#fdf6f9 100%);
+  border-right:1px solid var(--border);
+  padding:28px 18px;
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.brand h1{font-size:1.35rem;line-height:1.1}
+.brand-sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--rose-dark);font-size:.85rem;margin-bottom:24px;letter-spacing:.3px}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav a{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border-radius:12px;
+  color:var(--ink-soft);text-decoration:none;font-size:.92rem;font-weight:500;
+  transition:all .25s ease;border:1px solid transparent;
+}
+.nav a:hover{background:var(--rose-soft);color:var(--rose-dark)}
+.nav a.active{
+  background:linear-gradient(135deg,#fff 0%,#fdeef2 100%);
+  color:var(--rose-dark);border-color:var(--border);
+  box-shadow:var(--shadow-soft);
+}
+.nav a .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.7}
+.nav a.active .dot{background:var(--rose-dark);opacity:1}
+
+.main{padding:36px 44px 80px;max-width:1400px;margin:0 auto;width:100%}
+.page{display:none;animation:fade .5s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ============ HEADER ============ */
+.page-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px}
+.page-title{font-size:2.1rem;font-weight:600;display:flex;align-items:center;gap:14px}
+.page-title .sub{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--rose-dark);font-weight:400;margin-top:4px}
+.crumb{font-size:.85rem;color:var(--ink-soft);font-style:italic}
+
+/* ============ CARDS ============ */
+.grid{display:grid;gap:20px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.card{
+  background:linear-gradient(180deg,#fff 0%, #fdf9fb 100%);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow-soft);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold-soft),var(--gold),var(--gold-soft),transparent);
+  opacity:.6;
+}
+.card h3{font-size:1.15rem;margin-bottom:10px;color:var(--navy)}
+.card p{color:var(--ink-soft);font-size:.93rem}
+.card.accent{background:linear-gradient(135deg,#fff 0%,#fdeef2 60%,#f8e1e7 100%)}
+.card.blue{background:linear-gradient(135deg,#fff 0%,#eaf3fa 100%);border-color:rgba(106,169,214,.3)}
+.card.gold{background:linear-gradient(135deg,#fff 0%,#fbf3e1 100%);border-color:rgba(201,169,97,.35)}
+.card.hero{
+  background:
+    radial-gradient(400px 200px at 90% 0%,#fdeef2 0%,transparent 60%),
+    radial-gradient(300px 200px at 0% 100%,#eaf3fa 0%,transparent 60%),
+    linear-gradient(180deg,#fff 0%,#fdf9fb 100%);
+  padding:34px;
+}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:999px;border:1px solid var(--border);
+  background:linear-gradient(180deg,#fff,#fdf6f9);
+  color:var(--ink);font-size:.88rem;font-weight:500;cursor:pointer;
+  transition:all .25s ease;text-decoration:none;
+}
+.btn:hover{box-shadow:var(--shadow-soft);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,var(--rose-blush),var(--rose-pastel));color:var(--rose-dark);border-color:rgba(138,74,94,.2)}
+.btn.gold{background:linear-gradient(135deg,var(--gold-soft),var(--champagne));color:#5a4420;border-color:rgba(201,169,97,.4);box-shadow:var(--shadow-gold)}
+.btn.blue{background:linear-gradient(135deg,var(--baby-blue),#b8d6ea);color:var(--navy);border-color:rgba(106,169,214,.3)}
+.btn.sm{padding:6px 12px;font-size:.8rem}
+
+/* ============ TAGS / CHIPS ============ */
+.chip{display:inline-block;padding:4px 10px;border-radius:999px;font-size:.75rem;background:var(--rose-soft);color:var(--rose-dark);border:1px solid rgba(138,74,94,.15);margin:2px}
+.chip.blue{background:#eaf3fa;color:var(--navy);border-color:rgba(106,169,214,.3)}
+.chip.gold{background:#fbf3e1;color:#5a4420;border-color:rgba(201,169,97,.35)}
+
+/* ============ PROGRESS ============ */
+.progress{height:10px;border-radius:999px;background:#f4e7ec;overflow:hidden;position:relative}
+.progress > span{display:block;height:100%;background:linear-gradient(90deg,var(--rose-blush),var(--rose-dark));border-radius:999px;transition:width .6s ease}
+.progress.gold > span{background:linear-gradient(90deg,var(--gold-soft),var(--gold))}
+.progress.blue > span{background:linear-gradient(90deg,var(--baby-blue),var(--butterfly-deep))}
+
+.circle-progress{position:relative;width:110px;height:110px}
+.circle-progress svg{transform:rotate(-90deg)}
+.circle-progress .value{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);font-weight:600}
+
+/* ============ TABLE ============ */
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid rgba(201,169,97,.18)}
+th{font-family:'Playfair Display',serif;color:var(--navy);font-weight:500;background:var(--rose-soft)}
+tbody tr:hover{background:var(--pearl-warm)}
+
+/* ============ TIMELINE ============ */
+.timeline{position:relative;padding-left:34px}
+.timeline::before{content:"";position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold-soft),var(--rose-blush),var(--baby-blue))}
+.week{position:relative;margin-bottom:28px}
+.week::before{content:"";position:absolute;left:-28px;top:8px;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--champagne));border:3px solid #fff;box-shadow:0 0 0 1px var(--gold-soft)}
+.week h3{font-size:1.25rem;margin-bottom:6px}
+.week .days{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.day{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;font-size:.87rem}
+.day strong{display:block;color:var(--rose-dark);margin-bottom:4px;font-family:'Playfair Display',serif}
+.day ul{list-style:none;padding:0}
+.day li{padding:3px 0;color:var(--ink-soft);position:relative;padding-left:14px}
+.day li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:.7rem;top:5px}
+
+/* ============ CALENDAR ============ */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.cal .dow{text-align:center;font-family:'Playfair Display',serif;color:var(--navy);font-size:.85rem;padding:8px;background:var(--rose-soft);border-radius:10px}
+.cal .cell{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;min-height:110px;font-size:.82rem;position:relative}
+.cal .cell .num{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--rose-dark);font-weight:600}
+.cal .cell .task{margin-top:6px;color:var(--ink-soft);font-size:.78rem}
+
+/* ============ FLASHCARD ============ */
+.flash{
+  perspective:1000px;height:220px;cursor:pointer;
+}
+.flash-inner{
+  position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d;
+}
+.flash.flipped .flash-inner{transform:rotateY(180deg)}
+.flash-face{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;
+  border:1px solid var(--border);
+}
+.flash-front{background:linear-gradient(135deg,#fff,#fdeef2)}
+.flash-back{background:linear-gradient(135deg,#eaf3fa,#fff);transform:rotateY(180deg)}
+.flash-face .word{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--navy)}
+.flash-face .phon{font-style:italic;color:var(--rose-dark);font-size:.9rem;margin-top:4px}
+.flash-face .meaning{font-size:1rem;color:var(--ink)}
+.flash-face .ex{font-size:.82rem;color:var(--ink-soft);margin-top:10px;font-style:italic;max-width:90%}
+
+/* ============ FORMS ============ */
+input,select,textarea{
+  width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:12px;
+  background:#fff;font-family:inherit;font-size:.9rem;color:var(--ink);
+  transition:all .2s;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rose-blush);box-shadow:0 0 0 3px rgba(243,201,212,.3)}
+label{display:block;font-size:.82rem;color:var(--ink-soft);margin-bottom:4px;font-weight:500}
+.form-row{margin-bottom:14px}
+
+/* ============ DECORATIONS ============ */
+.corner-butterfly{position:absolute;opacity:.85;pointer-events:none}
+.corner-butterfly.tl{top:-20px;left:-20px;width:120px;transform:rotate(-15deg)}
+.corner-butterfly.tr{top:-20px;right:-20px;width:110px;transform:rotate(20deg) scaleX(-1)}
+.corner-butterfly.bl{bottom:-20px;left:-20px;width:100px;transform:rotate(10deg)}
+.corner-butterfly.br{bottom:-20px;right:-20px;width:110px;transform:rotate(-10deg) scaleX(-1)}
+
+.float-butterfly{position:fixed;pointer-events:none;opacity:.5;z-index:1;animation:float 12s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translate(0,0) rotate(0)}25%{transform:translate(20px,-15px) rotate(5deg)}50%{transform:translate(-10px,-30px) rotate(-5deg)}75%{transform:translate(-25px,-10px) rotate(3deg)}}
+
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold-soft),var(--gold),var(--gold-soft),transparent);margin:24px 0;opacity:.6}
+
+/* ============ MOBILE NAV ============ */
+.mobile-nav{display:none}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1100px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .main{padding:24px 18px 100px}
+  .mobile-nav{
+    display:flex;position:fixed;bottom:0;left:0;right:0;
+    background:linear-gradient(180deg,#fff,#fdf6f9);
+    border-top:1px solid var(--border);
+    padding:8px 4px;z-index:100;
+    justify-content:space-around;box-shadow:0 -4px 20px rgba(138,74,94,.1);
+  }
+  .mobile-nav a{
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    font-size:.68rem;color:var(--ink-soft);text-decoration:none;padding:6px 4px;
+    border-radius:8px;
+  }
+  .mobile-nav a.active{color:var(--rose-dark);background:var(--rose-soft)}
+  .mobile-nav a .ic{font-size:1.1rem}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .cal{grid-template-columns:repeat(2,1fr)}
+  .page-title{font-size:1.6rem}
+}
+
+/* ============ REWARD BUTTERFLY ============ */
+.reward{position:fixed;pointer-events:none;z-index:9999;animation:rewardFly 2s ease-out forwards}
+@keyframes rewardFly{
+  0%{transform:translate(0,0) scale(.5);opacity:0}
+  20%{opacity:1;transform:translate(0,-30px) scale(1)}
+  100%{transform:translate(80px,-300px) scale(1.2);opacity:0}
+}
+
+/* ============ QUOTE ============ */
+.quote{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;
+  color:var(--rose-dark);padding:14px 20px;border-left:3px solid var(--gold);
+  background:linear-gradient(90deg,rgba(253,238,242,.5),transparent);
+  border-radius:0 12px 12px 0;margin:10px 0;
+}
+
+/* ============ STAT ============ */
+.stat{text-align:center;padding:18px 10px}
+.stat .big{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--navy);font-weight:600;line-height:1}
+.stat .lbl{font-size:.8rem;color:var(--ink-soft);margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+
+/* ============ ERROR CARD ============ */
+.error-card{
+  background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px;
+  border-left:4px solid var(--rose-dark);
+}
+.error-card .meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.error-card h4{font-size:1rem;color:var(--navy);margin-bottom:6px}
+.error-card .row{display:grid;grid-template-columns:120px 1fr;gap:8px;font-size:.85rem;padding:3px 0}
+.error-card .row strong{color:var(--rose-dark);font-weight:500}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--rose-blush),var(--gold-soft));border-radius:10px}
+
+/* ============ TABS ============ */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;border-bottom:1px solid var(--border);padding-bottom:10px}
+.tab{padding:8px 16px;border-radius:999px;background:transparent;border:1px solid transparent;cursor:pointer;font-size:.85rem;color:var(--ink-soft);transition:all .2s}
+.tab:hover{background:var(--rose-soft)}
+.tab.active{background:linear-gradient(135deg,var(--rose-blush),var(--rose-pastel));color:var(--rose-dark);border-color:rgba(138,74,94,.2)}
+
+.hidden{display:none !important}
+
+/* ============ FLOW ARROW ============ */
+.flow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+.flow .step{background:linear-gradient(135deg,#fff,#fdeef2);border:1px solid var(--border);padding:10px 16px;border-radius:12px;font-size:.88rem;color:var(--navy);font-weight:500}
+.flow .arrow{color:var(--gold);font-size:1.2rem}
+
+/* ============ HERO BUTTERFLY ============ */
+.hero-butterfly{width:60px;height:60px;display:inline-block;vertical-align:middle;margin-left:10px;animation:float 6s ease-in-out infinite}
+
+
+.formula{font-family:monospace;background:rgba(255,255,255,.78);border:1px solid var(--border);border-radius:10px;padding:10px;margin:9px 0;color:var(--navy);font-size:1.02rem;line-height:1.55}.card h4{color:var(--rose-dark);margin-bottom:5px}.card ol{padding-left:22px}.card ol li{margin:7px 0}
+</style>
+</head>
+<body>
+
+<!-- ========== BUTTERFLY SVG TEMPLATE ========== -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+  <radialGradient id="wingGrad1" cx="30%" cy="40%">
+    <stop offset="0%" stop-color="#a8d0ec"/>
+    <stop offset="40%" stop-color="#6aa9d6"/>
+    <stop offset="80%" stop-color="#3a78a8"/>
+    <stop offset="100%" stop-color="#1f4e73"/>
+  </radialGradient>
+  <radialGradient id="wingGrad2" cx="50%" cy="50%">
+    <stop offset="0%" stop-color="#cfe3f2" stop-opacity=".9"/>
+    <stop offset="60%" stop-color="#6aa9d6" stop-opacity=".4"/>
+    <stop offset="100%" stop-color="#3a78a8" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2c3e66"/>
+    <stop offset="100%" stop-color="#1a2840"/>
+  </linearGradient>
+  <filter id="wingTex">
+    <feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/>
+    <feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.3  0 0 0 0 0.5  0 0 0 0.15 0"/>
+    <feComposite in2="SourceGraphic" operator="in"/>
+  </filter>
+  <symbol id="butterfly" viewBox="0 0 200 160">
+    <!-- left upper wing -->
+    <path d="M100,80 C70,30 20,20 10,60 C5,90 40,100 60,95 C75,92 90,88 100,80 Z" fill="url(#wingGrad1)" stroke="#1f4e73" stroke-width="1.2"/>
+    <path d="M100,80 C70,30 20,20 10,60 C5,90 40,100 60,95 C75,92 90,88 100,80 Z" fill="url(#wingGrad2)"/>
+    <!-- right upper wing -->
+    <path d="M100,80 C130,30 180,20 190,60 C195,90 160,100 140,95 C125,92 110,88 100,80 Z" fill="url(#wingGrad1)" stroke="#1f4e73" stroke-width="1.2"/>
+    <path d="M100,80 C130,30 180,20 190,60 C195,90 160,100 140,95 C125,92 110,88 100,80 Z" fill="url(#wingGrad2)"/>
+    <!-- left lower wing -->
+    <path d="M100,85 C80,100 50,130 30,125 C15,120 25,95 55,90 C75,87 90,86 100,85 Z" fill="url(#wingGrad1)" stroke="#1f4e73" stroke-width="1.2"/>
+    <!-- right lower wing -->
+    <path d="M100,85 C120,100 150,130 170,125 C185,120 175,95 145,90 C125,87 110,86 100,85 Z" fill="url(#wingGrad1)" stroke="#1f4e73" stroke-width="1.2"/>
+    <!-- wing veins -->
+    <g stroke="#1f4e73" stroke-width=".6" fill="none" opacity=".6">
+      <path d="M100,80 Q60,55 20,55"/>
+      <path d="M100,80 Q70,70 30,80"/>
+      <path d="M100,80 Q140,55 180,55"/>
+      <path d="M100,80 Q130,70 170,80"/>
+      <path d="M100,85 Q70,110 40,120"/>
+      <path d="M100,85 Q130,110 160,120"/>
+    </g>
+    <!-- wing spots -->
+    <circle cx="45" cy="55" r="4" fill="#cfe3f2" opacity=".7"/>
+    <circle cx="155" cy="55" r="4" fill="#cfe3f2" opacity=".7"/>
+    <circle cx="35" cy="110" r="3" fill="#cfe3f2" opacity=".6"/>
+    <circle cx="165" cy="110" r="3" fill="#cfe3f2" opacity=".6"/>
+    <!-- body -->
+    <ellipse cx="100" cy="85" rx="4" ry="22" fill="url(#bodyGrad)"/>
+    <circle cx="100" cy="60" r="5" fill="url(#bodyGrad)"/>
+    <!-- antennae -->
+    <path d="M100,58 Q92,45 85,40" stroke="#1a2840" stroke-width="1" fill="none"/>
+    <path d="M100,58 Q108,45 115,40" stroke="#1a2840" stroke-width="1" fill="none"/>
+    <circle cx="85" cy="40" r="1.5" fill="#1a2840"/>
+    <circle cx="115" cy="40" r="1.5" fill="#1a2840"/>
+  </symbol>
+</defs>
+</svg>
+
+<!-- floating decorative butterflies -->
+<div class="float-butterfly" style="top:15%;right:4%;width:50px"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+<div class="float-butterfly" style="top:55%;left:2%;width:40px;animation-delay:-4s"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+
+<div class="app">
+
+<!-- ========== SIDEBAR ========== -->
+<aside class="sidebar">
+  <div class="brand">
+    <svg width="34" height="34" viewBox="0 0 200 160"><use href="#butterfly"/></svg>
+    <h1>SAT Study<br><span style="color:var(--gold);font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:500">Princess</span></h1>
+  </div>
+  <div class="brand-sub">Transformando preparação em confiança, uma questão por vez.</div>
+  <nav class="nav" id="nav">
+    <a href="#" data-page="dashboard" class="active"><span class="dot"></span>Dashboard</a>
+    <a href="#" data-page="english"><span class="dot"></span>English</a>
+    <a href="#" data-page="math"><span class="dot"></span>Math</a>
+        <a href="#" data-page="revisions"><span class="dot"></span>Revisões</a>
+    <a href="#" data-page="errorlog"><span class="dot"></span>Error Log</a>
+    <a href="#" data-page="calendar"><span class="dot"></span>Calendário</a>
+    <a href="#" data-page="simulados"><span class="dot"></span>Simulados</a>
+    <a href="#" data-page="progress"><span class="dot"></span>Progresso</a>
+    <a href="#" data-page="materials"><span class="dot"></span>Materiais</a>
+    <a href="#" data-page="focus"><span class="dot"></span>Meu Foco</a>
+  </nav>
+  <div style="margin-top:30px;padding:14px;background:linear-gradient(135deg,#fdeef2,#eaf3fa);border-radius:14px;border:1px solid var(--border);text-align:center">
+    <svg width="40" height="30" viewBox="0 0 200 160"><use href="#butterfly"/></svg>
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--rose-dark);font-size:.85rem;margin-top:4px">Uma princesa conquistando sua universidade.</div>
+  </div>
+</aside>
+
+<!-- ========== MAIN ========== -->
+<main class="main">
+
+<!-- ============ DASHBOARD ============ -->
+<section class="page active" id="dashboard">
+  <div class="page-head">
+    <div>
+      <div class="page-title">
+        SAT STUDY PRINCESS
+        <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span>
+      </div>
+      <div class="crumb">Seu planner de estudos elegante · 8 semanas até o SAT</div>
+    </div>
+  </div>
+
+  <!-- META DOS 2 MESES -->
+  <div class="card hero" style="margin-bottom:22px;position:relative">
+    <div class="corner-butterfly tr"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <span class="chip gold">🎯</span>
+      <h2 style="font-size:1.5rem">META DOS 2 MESES</h2>
+    </div>
+    <p class="quote">“Não vamos colocar como objetivo simplesmente fazer mais questões.”</p>
+    <p style="margin:14px 0">Objetivo final:</p>
+    <div class="grid grid-3" style="margin:10px 0 18px">
+      <div class="card accent" style="text-align:center"><strong style="color:var(--rose-dark)">Questão fácil</strong><div style="margin-top:6px">Praticamente automática</div></div>
+      <div class="card accent" style="text-align:center"><strong style="color:var(--rose-dark)">Questão média</strong><div style="margin-top:6px">Método conhecido</div></div>
+      <div class="card accent" style="text-align:center"><strong style="color:var(--rose-dark)">Questão difícil</strong><div style="margin-top:6px">Você sabe como atacar, mesmo que demore mais</div></div>
+    </div>
+    <div style="text-align:center;padding:14px;background:linear-gradient(135deg,#fbf3e1,#fff);border-radius:14px;border:1px solid var(--border);margin:10px 0">
+      <div style="font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--navy);font-weight:600">“Não deixar pontos fáceis na mesa.”</div>
+    </div>
+    <div class="divider"></div>
+    <h3 style="color:var(--gold);font-size:1rem;letter-spacing:2px;text-transform:uppercase">Estratégia geral</h3>
+    <div class="flow">
+      <div class="step">Diagnóstico</div><span class="arrow">→</span>
+      <div class="step">Fechar lacunas</div><span class="arrow">→</span>
+      <div class="step">Treino direcionado</div><span class="arrow">→</span>
+      <div class="step">Velocidade</div><span class="arrow">→</span>
+      <div class="step">Simulados</div><span class="arrow">→</span>
+      <div class="step">Revisão dos erros</div>
+    </div>
+  </div>
+
+  <!-- PONTO DE PARTIDA -->
+  <div class="grid grid-2" style="margin-bottom:22px">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span class="chip">📊</span>
+        <h3 style="margin:0">PONTO DE PARTIDA</h3>
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--rose-dark);margin-bottom:14px">SAT — 12/09/2026</div>
+      <div class="stat"><div class="big">700</div><div class="lbl">Total</div></div>
+      <div class="divider"></div>
+      <div style="display:flex;justify-content:space-around">
+        <div class="stat"><div class="big" style="font-size:1.6rem">300</div><div class="lbl">Reading & Writing</div></div>
+        <div class="stat"><div class="big" style="font-size:1.6rem">400</div><div class="lbl">Math</div></div>
+      </div>
+      <div class="divider"></div>
+      <p style="text-align:center;font-style:italic;color:var(--rose-dark)">“Ponto de partida — não é o limite.”</p>
+    </div>
+    <div class="card blue">
+      <h3>Progresso visual</h3>
+      <p style="margin-bottom:14px">Evolução estimada até a meta (1400+)</p>
+      <div style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px"><span>Reading & Writing</span><span>300 / 800</span></div>
+        <div class="progress"><span style="width:37.5%"></span></div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px"><span>Math</span><span>400 / 800</span></div>
+        <div class="progress blue"><span style="width:50%"></span></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:4px"><span>Total</span><span>700 / 1600</span></div>
+        <div class="progress gold"><span style="width:43.75%"></span></div>
+      </div>
+      <div style="margin-top:16px;text-align:center">
+        <div class="circle-progress" style="margin:0 auto">
+          <svg width="110" height="110">
+            <circle cx="55" cy="55" r="48" stroke="#f4e7ec" stroke-width="8" fill="none"/>
+            <circle cx="55" cy="55" r="48" stroke="url(#progGrad)" stroke-width="8" fill="none" stroke-dasharray="301" stroke-dashoffset="170" stroke-linecap="round"/>
+            <defs><linearGradient id="progGrad"><stop offset="0%" stop-color="#c9a961"/><stop offset="100%" stop-color="#8a4a5e"/></linearGradient></defs>
+          </svg>
+          <div class="value">44%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESTRUTURA DO SAT -->
+  <div class="card" style="position:relative">
+    <div class="corner-butterfly bl"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <span class="chip gold">📚</span>
+      <h3 style="margin:0;font-size:1.3rem">ESTRUTURA DO SAT</h3>
+    </div>
+    <p>O SAT atual tem <strong style="color:var(--navy)">98 questões</strong>:</p>
+    <div class="grid grid-2" style="margin:16px 0">
+      <div class="card accent">
+        <h4 style="color:var(--rose-dark)">Reading & Writing</h4>
+        <div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--navy);margin:6px 0">54 questões</div>
+        <div style="color:var(--ink-soft);font-size:.9rem">64 minutos</div>
+      </div>
+      <div class="card blue">
+        <h4 style="color:var(--navy)">Math</h4>
+        <div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--navy);margin:6px 0">44 questões</div>
+        <div style="color:var(--ink-soft);font-size:.9rem">70 minutos</div>
+      </div>
+    </div>
+    <p style="margin:10px 0">Cada seção possui <strong>dois módulos</strong>.</p>
+    <div class="quote">“O desempenho no primeiro módulo influencia a dificuldade do segundo.”</div>
+    <div class="quote">“Você pode navegar entre as questões dentro do módulo até o tempo acabar. Depois que sai do módulo, não pode voltar.”</div>
+  </div>
+</section>
+
+<!-- ============ ENGLISH ============ -->
+<section class="page" id="english">
+  <div class="page-head"><div>
+    <div class="page-title">Reading & Writing <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+    <div class="crumb">Vocabulário + textos + frases + questões por habilidade</div>
+  </div></div>
+
+  <div class="card hero" style="margin-bottom:22px">
+    <p class="quote">“Aqui você vai aprender a palavra dentro de uma frase, não apenas decorar uma tradução.”</p>
+    <div class="flow">
+      <div class="step">Palavra</div><span class="arrow">→</span>
+      <div class="step">Frase</div><span class="arrow">→</span>
+      <div class="step">Texto</div><span class="arrow">→</span>
+      <div class="step">Questão SAT</div><span class="arrow">→</span>
+      <div class="step">Revisão</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="wic">1. Words in Context</button>
+    <button class="tab" data-tab="trans">2. Transitions</button>
+    <button class="tab" data-tab="gram">3. Grammar</button>
+    <button class="tab" data-tab="info">4. Information & Ideas</button>
+    <button class="tab" data-tab="craft">5. Craft & Structure</button>
+    <button class="tab" data-tab="examples">6. Textos & Frases</button>
+    <button class="tab" data-tab="flash">7. Flashcards</button>
+  </div>
+
+  <div id="tab-wic" class="tab-content">
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Words in Context</h3>
+        <p><strong>compelling</strong> = convincente</p>
+        <div class="quote">“The evidence was compelling, so the researchers accepted the hypothesis.”</div>
+        <p><strong>Como pensar:</strong> a evidência foi tão forte que convenceu os pesquisadores.</p>
+      </div>
+      <div class="card gold">
+        <h3>Método para o SAT</h3>
+        <ol>
+          <li>Leia a frase inteira.</li><li>Identifique o tom e a ideia.</li>
+          <li>Tente prever o significado.</li><li>Teste cada alternativa na frase.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3>Palavras essenciais em contexto</h3>
+      <div class="grid grid-3" style="margin-top:14px">
+        <div class="card accent"><strong>indicate</strong><p>“The results indicate a change.”<br>→ indicam / mostram</p></div>
+        <div class="card accent"><strong>imply</strong><p>“The statement implies that costs rose.”<br>→ dá a entender</p></div>
+        <div class="card accent"><strong>undermine</strong><p>“The new evidence undermines the claim.”<br>→ enfraquece</p></div>
+        <div class="card accent"><strong>reinforce</strong><p>“The findings reinforce the theory.”<br>→ reforçam</p></div>
+        <div class="card accent"><strong>substantial</strong><p>“A substantial increase occurred.”<br>→ considerável</p></div>
+        <div class="card accent"><strong>plausible</strong><p>“This explanation is plausible.”<br>→ plausível</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-trans" class="tab-content hidden">
+    <div class="card"><h3>Transitions — Flashcards</h3><p>Clique para virar.</p><div class="grid grid-3" id="transGrid"></div></div>
+  </div>
+
+  <div id="tab-gram" class="tab-content hidden">
+    <div class="card"><h3>Grammar</h3>
+      <div class="grid grid-3" style="margin-top:14px" id="gramGrid"></div>
+      <div class="card gold" style="margin-top:18px">
+        <h3>Exemplos de frases</h3>
+        <p><strong>Correct:</strong> “The results <em>show</em> that the method is effective.”</p>
+        <p><strong>Correct:</strong> “The scientist tested the theory; however, the results were inconclusive.”</p>
+        <p><strong>Correct:</strong> “The study, published in 2024, examines migration patterns.”</p>
+        <p><strong>Atenção:</strong> <em>its</em> = posse; <em>it’s</em> = it is/it has.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-info" class="tab-content hidden">
+    <div class="card"><h3>Information & Ideas</h3><div class="grid grid-3" style="margin-top:14px">
+      <div class="card accent"><strong>Main idea</strong><p>O ponto central que o texto desenvolve.</p></div>
+      <div class="card accent"><strong>Inference</strong><p>Conclusão sustentada por pistas do texto.</p></div>
+      <div class="card accent"><strong>Evidence</strong><p>Trecho ou dado que sustenta uma conclusão.</p></div>
+      <div class="card accent"><strong>Detail</strong><p>Informação específica apresentada pelo autor.</p></div>
+      <div class="card accent"><strong>Purpose</strong><p>O que o autor pretende fazer com o texto.</p></div>
+      <div class="card accent"><strong>Command of Evidence</strong><p>Escolher a evidência que melhor apoia a conclusão.</p></div>
+    </div></div>
+  </div>
+
+  <div id="tab-craft" class="tab-content hidden">
+    <div class="card"><h3>Craft & Structure</h3><div class="grid grid-2" style="margin-top:14px">
+      <div class="card blue"><strong>Words in context</strong><p>O significado depende da frase e do argumento.</p></div>
+      <div class="card blue"><strong>Text structure</strong><p>Observe como cada parte contribui para o texto.</p></div>
+      <div class="card blue"><strong>Author's purpose</strong><p>Pergunte: por que o autor incluiu este trecho?</p></div>
+      <div class="card blue"><strong>Cross-text</strong><p>Compare a posição, evidência e conclusão de dois textos.</p></div>
+    </div></div>
+  </div>
+
+  <div id="tab-examples" class="tab-content hidden">
+    <div class="card"><h3>Textos curtos para treinar compreensão</h3>
+      <div class="card accent" style="margin-top:14px"><strong>Texto 1 — Science</strong><p>“For decades, researchers assumed that the species migrated only during winter. Recent observations, however, suggest that migration also occurs in early spring. This new evidence has led scientists to reconsider the species’ movement patterns.”</p><p><strong>Treino:</strong> qual é a ideia central? O que <em>however</em> sinaliza? O que a evidência fez os cientistas fazerem?</p></div>
+      <div class="card accent"><strong>Texto 2 — History</strong><p>“The invention of the printing press did not immediately transform every society. Its effects varied according to literacy rates, economic conditions, and access to printed material. Nevertheless, the technology eventually expanded the circulation of information.”</p><p><strong>Treino:</strong> qual é a função de <em>nevertheless</em>? Qual fator é citado como explicação?</p></div>
+      <div class="card accent"><strong>Texto 3 — Humanities</strong><p>“Although the painting appears simple at first glance, its composition contains repeated geometric patterns. These patterns guide the viewer’s attention toward the central figure and create a sense of balance.”</p><p><strong>Treino:</strong> o que <em>although</em> indica? Para que servem os padrões?</p></div>
+      <div class="card gold"><strong>Frases para aprender vocabulário</strong>
+        <p>“The results <em>indicate</em> a significant change.” → indicam</p>
+        <p>“The evidence <em>supports</em> the researcher’s claim.” → sustenta</p>
+        <p>“The two studies <em>yield</em> similar results.” → produzem / geram</p>
+        <p>“The explanation is <em>consistent with</em> the data.” → é consistente com</p>
+        <p>“The author <em>emphasizes</em> the importance of access.” → enfatiza</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-flash" class="tab-content hidden">
+    <div class="card hero"><h3 style="color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:.9rem">🦋 SAT ENGLISH FLASHCARDS</h3>
+      <h2 style="margin:6px 0">VOCABULÁRIO + LINGUAGEM DO SAT</h2>
+      <p>Agora os flashcards ficam dentro de English, junto das outras atividades.</p>
+      <div id="satCoreGrid" class="grid grid-3" style="gap:12px;margin-top:18px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MATH ============ -->
+<section class="page" id="math">
+  <div class="page-head"><div>
+    <div class="page-title">Math <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+    <div class="crumb">Fórmulas essenciais + explicação + exemplo + conteúdo dos 4 domínios</div>
+  </div></div>
+
+  <div class="card hero" style="margin-bottom:22px">
+    <p class="quote">“A fórmula é só o começo: você precisa saber quando usar, o que cada símbolo significa e como aplicar.”</p>
+    <p>O SAT fornece uma folha de referência de fórmulas durante Math, mas você ainda precisa reconhecer o método e interpretar o problema.</p>
+  </div>
+
+  <div class="card gold" style="margin-bottom:22px">
+    <h3>1. ALGEBRA</h3>
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card accent"><h4>Equação linear</h4><div class="formula">ax + b = c → x = (c − b)/a</div><p>Ex.: 3x + 5 = 20 → 3x = 15 → <strong>x = 5</strong>.</p></div>
+      <div class="card accent"><h4>Inclinação</h4><div class="formula">m = (y₂ − y₁)/(x₂ − x₁)</div><p>Ex.: (1,2) e (3,6): m = 4/2 = <strong>2</strong>.</p></div>
+      <div class="card accent"><h4>Forma slope-intercept</h4><div class="formula">y = mx + b</div><p><strong>m</strong> é a inclinação; <strong>b</strong> é o intercepto em y. Ex.: y = 2x + 3.</p></div>
+      <div class="card accent"><h4>Razão e proporção</h4><div class="formula">a/b = c/d → ad = bc</div><p>Ex.: x/5 = 6/10 → 10x = 30 → <strong>x = 3</strong>.</p></div>
+      <div class="card accent"><h4>Porcentagem</h4><div class="formula">parte = taxa × total</div><p>Ex.: 20% de 80 = 0,20 × 80 = <strong>16</strong>.</p></div>
+      <div class="card accent"><h4>Percentual de mudança</h4><div class="formula">(novo − antigo)/antigo × 100%</div><p>Ex.: 50 → 60: 10/50 = <strong>20%</strong> de aumento.</p></div>
+      <div class="card accent"><h4>Sistemas</h4><div class="formula">substituição ou eliminação</div><p>Ex.: y = x + 2 e 2x + y = 8 → 2x + x + 2 = 8 → <strong>x = 2, y = 4</strong>.</p></div>
+      <div class="card accent"><h4>Desigualdades</h4><div class="formula">ax &lt; b → x &lt; b/a</div><p>Se multiplicar/dividir por número negativo, <strong>inverta o sinal</strong>.</p></div>
+    </div>
+  </div>
+
+  <div class="card blue" style="margin-bottom:22px">
+    <h3>2. ADVANCED MATH</h3>
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card"><h4>Quadrática</h4><div class="formula">ax² + bx + c = 0</div><p>Modelo geral de uma equação quadrática.</p></div>
+      <div class="card"><h4>Fórmula quadrática</h4><div class="formula">x = (−b ± √(b² − 4ac))/(2a)</div><p>Ex.: x² − 5x + 6 = 0 → x = <strong>2 ou 3</strong>.</p></div>
+      <div class="card"><h4>Discriminante</h4><div class="formula">Δ = b² − 4ac</div><p>Δ&gt;0: duas raízes reais; Δ=0: uma raiz real; Δ&lt;0: nenhuma raiz real.</p></div>
+      <div class="card"><h4>Vértice da parábola</h4><div class="formula">xᵥ = −b/(2a)</div><p>Depois, calcule yᵥ = f(xᵥ). Ex.: y=x²−4x+3 → xᵥ=<strong>2</strong>.</p></div>
+      <div class="card"><h4>Fatoração</h4><div class="formula">x² + bx + c = (x+p)(x+q)</div><p>p+q=b e pq=c. Ex.: x²+5x+6=(x+2)(x+3).</p></div>
+      <div class="card"><h4>Leis dos expoentes</h4><div class="formula">aᵐaⁿ=aᵐ⁺ⁿ · aᵐ/aⁿ=aᵐ⁻ⁿ</div><p>Também: (aᵐ)ⁿ=aᵐⁿ e a⁰=1 (a≠0).</p></div>
+      <div class="card"><h4>Radicais</h4><div class="formula">√(ab)=√a·√b</div><p>Ex.: √36 = 6. Simplifique fatores quadrados quando possível.</p></div>
+      <div class="card"><h4>Exponencial</h4><div class="formula">y = a·bˣ</div><p>b&gt;1 indica crescimento; 0&lt;b&lt;1 indica decaimento.</p></div>
+      <div class="card"><h4>Função</h4><div class="formula">f(x) = expressão em x</div><p>Ex.: f(x)=2x+1 → f(4)=2(4)+1=<strong>9</strong>.</p></div>
+      <div class="card"><h4>Forma de círculo</h4><div class="formula">(x−h)²+(y−k)²=r²</div><p>Centro = (h,k), raio = r. Ex.: (x−2)²+(y+1)²=9 → centro (2,−1), r=3.</p></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:22px">
+    <h3>3. PROBLEM-SOLVING & DATA ANALYSIS</h3>
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card accent"><h4>Média</h4><div class="formula">mean = soma ÷ quantidade</div><p>2, 4, 6 → (2+4+6)/3 = <strong>4</strong>.</p></div>
+      <div class="card accent"><h4>Mediana</h4><div class="formula">valor central após ordenar</div><p>2, 5, 9 → mediana = <strong>5</strong>.</p></div>
+      <div class="card accent"><h4>Amplitude</h4><div class="formula">range = máximo − mínimo</div><p>3, 8, 10 → 10−3 = <strong>7</strong>.</p></div>
+      <div class="card accent"><h4>Probabilidade</h4><div class="formula">P(evento)=casos favoráveis/casos possíveis</div><p>3 azuis em 10 → P(azul)=<strong>3/10</strong>.</p></div>
+      <div class="card accent"><h4>Probabilidade complementar</h4><div class="formula">P(não A)=1−P(A)</div><p>Se P(A)=0,7, então P(não A)=<strong>0,3</strong>.</p></div>
+      <div class="card accent"><h4>Taxa unitária</h4><div class="formula">taxa = quantidade ÷ unidades</div><p>180 km em 3 h → <strong>60 km/h</strong>.</p></div>
+      <div class="card accent"><h4>Margem de erro</h4><div class="formula">estimativa ± margem</div><p>52% ± 3% → intervalo aproximado de <strong>49% a 55%</strong>.</p></div>
+      <div class="card accent"><h4>Escala</h4><div class="formula">fator k → comprimentos ×k</div><p>Se k=2, um lado de 5 vira <strong>10</strong>; área muda por k².</p></div>
+    </div>
+  </div>
+
+  <div class="card gold" style="margin-bottom:22px">
+    <h3>4. GEOMETRY & TRIGONOMETRY</h3>
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card"><h4>Retângulo</h4><div class="formula">A=lw · P=2l+2w</div><p>l=5,w=3 → A=<strong>15</strong>, P=<strong>16</strong>.</p></div>
+      <div class="card"><h4>Triângulo</h4><div class="formula">A=bh/2</div><p>b=8,h=5 → A=<strong>20</strong>.</p></div>
+      <div class="card"><h4>Paralelogramo</h4><div class="formula">A=bh</div><p>b=7,h=4 → A=<strong>28</strong>.</p></div>
+      <div class="card"><h4>Trapézio</h4><div class="formula">A=(b₁+b₂)h/2</div><p>b₁=4,b₂=8,h=3 → A=<strong>18</strong>.</p></div>
+      <div class="card"><h4>Círculo</h4><div class="formula">A=πr² · C=2πr</div><p>r=3 → A=<strong>9π</strong>, C=<strong>6π</strong>.</p></div>
+      <div class="card"><h4>Arco e setor</h4><div class="formula">arco=(θ/360)·2πr<br>setor=(θ/360)·πr²</div><p>Use θ em graus.</p></div>
+      <div class="card"><h4>Prisma / cilindro</h4><div class="formula">V=Bh</div><p>B é a área da base. Cilindro: V=πr²h.</p></div>
+      <div class="card"><h4>Pirâmide / cone</h4><div class="formula">V=Bh/3</div><p>Cone: V=πr²h/3.</p></div>
+      <div class="card"><h4>Esfera</h4><div class="formula">V=4πr³/3</div><p>r=2 → V=<strong>32π/3</strong>.</p></div>
+      <div class="card"><h4>Prisma retangular — área total</h4><div class="formula">SA=2(lw+lh+wh)</div><p>l=2,w=3,h=4 → SA=<strong>52</strong>.</p></div>
+      <div class="card"><h4>Cilindro — área total</h4><div class="formula">SA=2πr²+2πrh</div><p>Inclui as duas bases e a superfície lateral.</p></div>
+      <div class="card"><h4>Pitágoras</h4><div class="formula">a²+b²=c²</div><p>Catetos 3 e 4 → c²=25 → <strong>c=5</strong>.</p></div>
+      <div class="card"><h4>Trigonometria</h4><div class="formula">sin θ=oposto/hipotenusa<br>cos θ=adjacente/hipotenusa<br>tan θ=oposto/adjacente</div><p>Triângulo 3-4-5: sin θ=3/5 se o lado oposto é 3.</p></div>
+      <div class="card"><h4>Triângulos especiais</h4><div class="formula">45-45-90: x,x,x√2<br>30-60-90: x,x√3,2x</div><p>Memorize as proporções.</p></div>
+      <div class="card"><h4>Soma dos ângulos</h4><div class="formula">triângulo = 180°</div><p>Se dois ângulos são 50° e 60°, o terceiro é <strong>70°</strong>.</p></div>
+      <div class="card"><h4>Distância</h4><div class="formula">d=√[(x₂−x₁)²+(y₂−y₁)²]</div><p>Entre (0,0) e (3,4): d=<strong>5</strong>.</p></div>
+      <div class="card"><h4>Ponto médio</h4><div class="formula">M=((x₁+x₂)/2,(y₁+y₂)/2)</div><p>Entre (2,4) e (6,8): M=<strong>(4,6)</strong>.</p></div>
+      <div class="card"><h4>Complementares e suplementares</h4><div class="formula">complementares = 90°<br>suplementares = 180°</div><p>35° complementar → <strong>55°</strong>.</p></div>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>O que realmente cai</h3>
+    <p>O Math oficial é dividido em Algebra, Advanced Math, Problem-Solving and Data Analysis e Geometry and Trigonometry. O College Board também informa que cerca de 30% das questões de Math são contextualizadas.</p>
+    <div class="grid grid-4" style="margin-top:14px"><div class="card accent"><strong>Algebra</strong><p>13–15 questões</p></div><div class="card accent"><strong>Advanced Math</strong><p>13–15</p></div><div class="card accent"><strong>PSDA</strong><p>5–7</p></div><div class="card accent"><strong>Geometry/Trig</strong><p>5–7</p></div></div>
+  </div>
+</section>
+
+<!-- ============ REVISIONS ============ -->
+<section class="page" id="revisions">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Revisões <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+      <div class="crumb">Semanas 3–4 · 5–6 · 7–8</div>
+    </div>
+  </div>
+
+  <!-- SEMANAS 3-4 -->
+  <div class="card hero" style="margin-bottom:22px">
+    <div class="corner-butterfly tl"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+    <h3 style="color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:.9rem">🟩 Semanas 3–4</h3>
+    <h2 style="margin:6px 0">TRANSFORMAR CONHECIMENTO EM PONTOS</h2>
+
+    <div class="card gold" style="margin:16px 0">
+      <h3 style="color:var(--rose-dark)">📓 Error Log Training</h3>
+      <p class="quote">“Não basta escrever: ❌ errei.”</p>
+      <p style="margin:10px 0">Cada erro deve receber uma classificação:</p>
+      <div class="grid grid-3" style="margin-top:10px">
+        <div class="chip">A — não sabia o conteúdo</div>
+        <div class="chip">B — sabia, mas não soube aplicar</div>
+        <div class="chip">C — erro de interpretação</div>
+        <div class="chip">D — erro de cálculo</div>
+        <div class="chip">E — falta de tempo</div>
+        <div class="chip">F — chute</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="week">
+      <h3>Semana 3–4 — Rotina semanal</h3>
+      <div class="days">
+        <div class="day"><strong>Segunda · Math</strong><ul><li>30 questões</li><li>CORRIGIR TODAS</li><li>Botão “Registrar erro”</li></ul></div>
+        <div class="day"><strong>Terça · R&W</strong><ul><li>25–30 questões</li><li>Separar erros em:</li><li>Vocabulary · Grammar · Transitions</li><li>Main Idea · Inference · Evidence</li><li>Rhetorical Synthesis · Cross-Text · Structure/Purpose</li></ul></div>
+        <div class="day"><strong>Quarta · Math fraqueza</strong><ul><li>FRAQUEZA PRINCIPAL</li><li>Ex: “Estou errando muito sistemas.” → Quarta é sistemas.</li></ul></div>
+        <div class="day"><strong>Quinta · R&W fraqueza</strong><ul><li>Reading & Writing — fraqueza principal</li></ul></div>
+        <div class="day"><strong>Sexta · Mixed</strong><ul><li>20 Math</li><li>20 R&W</li><li>Cronometrado</li></ul></div>
+        <div class="day"><strong>Sábado · Simulação parcial</strong><ul><li>RW Module 1</li><li>RW Module 2</li><li>Math Module 1</li><li>OU Math completo</li></ul></div>
+        <div class="day"><strong>Domingo · Revisão</strong><ul><li>Nada de estudar conteúdo novo</li></ul></div>
+      </div>
+      <div class="quote" style="margin-top:14px">“Não fazer sistemas + geometria + porcentagem + trigonometria + funções tudo no mesmo dia. Ataque uma fraqueza.”</div>
+    </div>
+  </div>
+
+  <!-- SEMANAS 5-6 -->
+  <div class="card hero" style="margin-top:30px;margin-bottom:22px">
+    <div class="corner-butterfly tr"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+    <h3 style="color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:.9rem">🟨 Semanas 5–6</h3>
+    <h2 style="margin:6px 0">VELOCIDADE</h2>
+    <div class="card blue" style="margin-top:14px">
+      <h3>⏱️ TIME MANAGEMENT</h3>
+      <div class="grid grid-2" style="margin-top:10px">
+        <div style="text-align:center;padding:14px;background:#fff;border-radius:12px;border:1px solid var(--border)">
+          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--navy)">64 min</div>
+          <div style="color:var(--ink-soft)">Reading & Writing · 54 questões</div>
+          <div style="font-size:.8rem;color:var(--rose-dark);margin-top:4px">≈ 1:11 por questão</div>
+        </div>
+        <div style="text-align:center;padding:14px;background:#fff;border-radius:12px;border:1px solid var(--border)">
+          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--navy)">70 min</div>
+          <div style="color:var(--ink-soft)">Math · 44 questões</div>
+          <div style="font-size:.8rem;color:var(--rose-dark);margin-top:4px">≈ 1:35 por questão</div>
+        </div>
+      </div>
+    </div>
+    <div class="card accent" style="margin-top:14px">
+      <h3 style="color:var(--rose-dark)">“Se uma questão está consumindo tempo demais:”</h3>
+      <ol style="padding-left:20px;margin-top:10px">
+        <li>Marca</li><li>Pula</li><li>Continua</li><li>Volta depois</li>
+      </ol>
+      <p class="quote" style="margin-top:12px">“Você pode navegar entre as questões dentro do módulo até o tempo acabar. Depois que sai do módulo, não pode voltar.”</p>
+    </div>
+  </div>
+
+  <!-- SEMANAS 7-8 -->
+  <div class="card hero" style="margin-top:30px">
+    <div class="corner-butterfly bl"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+    <h3 style="color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-size:.9rem">🟪 Semanas 7–8</h3>
+    <h2 style="margin:6px 0">SIMULAÇÃO REAL</h2>
+    <p class="quote">“Aqui não é mais hora de aprender 50 assuntos novos. É hora de consolidar.”</p>
+
+    <div class="timeline" style="margin-top:20px">
+      <div class="week">
+        <h3>Semana 7</h3>
+        <div class="days">
+          <div class="day"><strong>Segunda</strong><ul><li>Revisão Math</li></ul></div>
+          <div class="day"><strong>Terça</strong><ul><li>Revisão R&W</li></ul></div>
+          <div class="day"><strong>Quarta</strong><ul><li>Questões difíceis</li></ul></div>
+          <div class="day"><strong>Quinta</strong><ul><li>Error Log</li></ul></div>
+          <div class="day"><strong>Sexta</strong><ul><li>Revisão de vocabulário</li></ul></div>
+          <div class="day" style="background:linear-gradient(135deg,#fff,#fdeef2);border-color:var(--rose-dark)"><strong>🔥 Sábado</strong><ul><li><strong>SIMULADO COMPLETO BLUEBOOK</strong></li></ul></div>
+          <div class="day"><strong>Domingo</strong><ul><li>Análise completa</li></ul></div>
+        </div>
+      </div>
+      <div class="week">
+        <h3>🔥 Semana 8</h3>
+        <div class="days">
+          <div class="day"><strong>Segunda</strong><ul><li>Math — erros recorrentes</li></ul></div>
+          <div class="day"><strong>Terça</strong><ul><li>R&W — erros recorrentes</li></ul></div>
+          <div class="day"><strong>Quarta</strong><ul><li>Vocabulary + Grammar</li></ul></div>
+          <div class="day"><strong>Quinta</strong><ul><li>Math difícil</li></ul></div>
+          <div class="day"><strong>Sexta</strong><ul><li>Revisão leve</li></ul></div>
+          <div class="day" style="background:linear-gradient(135deg,#fff,#fdeef2);border-color:var(--rose-dark)"><strong>🔥 Sábado</strong><ul><li><strong>SIMULADO FINAL</strong></li></ul></div>
+          <div class="day"><strong>Domingo</strong><ul><li>Análise</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ERROR LOG ============ -->
+<section class="page" id="errorlog">
+  <div class="page-head">
+    <div>
+      <div class="page-title">MEU ERROR LOG <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+      <div class="crumb">Seu livro de preparação</div>
+    </div>
+  </div>
+
+  <div class="card hero" style="margin-bottom:22px">
+    <p class="quote">“Isso vai ser praticamente seu livro de preparação.”</p>
+  </div>
+
+  <div class="grid grid-2" style="margin-bottom:22px">
+    <div class="card">
+      <h3>Registrar novo erro</h3>
+      <div class="form-row"><label>Questão #</label><input id="eQ" placeholder="ex: 47"></div>
+      <div class="form-row"><label>Área</label>
+        <select id="eArea"><option>Math</option><option>Reading & Writing</option></select>
+      </div>
+      <div class="form-row"><label>Tópico</label><input id="eTopic" placeholder="ex: sistemas"></div>
+      <div class="form-row"><label>Erro</label><textarea id="eErr" rows="2" placeholder="o que você fez de errado"></textarea></div>
+      <div class="form-row"><label>Tipo</label>
+        <select id="eType">
+          <option>A — não sabia o conteúdo</option>
+          <option>B — sabia, mas não soube aplicar</option>
+          <option>C — erro de interpretação</option>
+          <option>D — erro de cálculo</option>
+          <option>E — falta de tempo</option>
+          <option>F — chute</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Problema / Resposta correta</label><textarea id="eSol" rows="2"></textarea></div>
+      <div class="form-row"><label>O que preciso lembrar</label><textarea id="eRule" rows="2"></textarea></div>
+      <button class="btn primary" onclick="addError()">✨ Registrar erro</button>
+    </div>
+    <div class="card">
+      <h3>Filtros</h3>
+      <div class="form-row"><label>Matéria</label>
+        <select id="fArea" onchange="renderErrors()"><option value="">Todas</option><option>Math</option><option>Reading & Writing</option></select>
+      </div>
+      <div class="form-row"><label>Tópico</label><input id="fTopic" placeholder="ex: grammar" oninput="renderErrors()"></div>
+      <div class="form-row"><label>Tipo de erro</label>
+        <select id="fType" onchange="renderErrors()">
+          <option value="">Todos</option>
+          <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Visualizar</label>
+        <select id="fView" onchange="renderErrors()">
+          <option value="recent">Erros recentes</option>
+          <option value="recurrent">Erros recorrentes</option>
+        </select>
+      </div>
+      <button class="btn gold" onclick="reviewErrors()">🦋 Revisar erros</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Meus erros registrados</h3>
+    <div id="errorList" style="margin-top:14px"></div>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:22px">
+    <div class="card accent">
+      <h3>Exemplo — Questão 47</h3>
+      <div class="row"><strong>Área:</strong> Math</div>
+      <div class="row"><strong>Tópico:</strong> sistemas</div>
+      <div class="row"><strong>Erro:</strong> não soube isolar a variável</div>
+      <div class="row"><strong>Tipo:</strong> B — aplicação</div>
+      <div class="row"><strong>Solução:</strong> substituição</div>
+      <div class="row"><strong>Lembrar:</strong> primeiro isolar uma variável</div>
+    </div>
+    <div class="card blue">
+      <h3>Exemplo — Questão 82</h3>
+      <div class="row"><strong>Área:</strong> Reading & Writing</div>
+      <div class="row"><strong>Tópico:</strong> Transition</div>
+      <div class="row"><strong>Erro:</strong> escolhi “however” porque parecia contrastar</div>
+      <div class="row"><strong>Problema:</strong> as duas frases apresentavam continuidade</div>
+      <div class="row"><strong>Correta:</strong> “therefore”</div>
+      <div class="row"><strong>Regra:</strong> verificar relação lógica antes de escolher a palavra</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALENDAR ============ -->
+<section class="page" id="calendar">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Calendário <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+      <div class="crumb">Rotina semanal personalizada · 8 semanas</div>
+    </div>
+  </div>
+
+  <div class="card hero" style="margin-bottom:22px">
+    <h3>📅 Rotina semanal personalizada</h3>
+    <div class="grid grid-4" style="margin-top:14px">
+      <div class="card accent"><strong>🧮 Segunda</strong><p>Math — conteúdo</p></div>
+      <div class="card accent"><strong>📖 Terça</strong><p>R&W — vocabulary + reading</p></div>
+      <div class="card accent"><strong>🧮 Quarta</strong><p>Math — questões</p></div>
+      <div class="card accent"><strong>📖 Quinta</strong><p>R&W — grammar + transitions</p></div>
+      <div class="card accent"><strong>🧮📖 Sexta</strong><p>Math + R&W misturados</p></div>
+      <div class="card accent"><strong>🔥 Sábado</strong><p>Simulado / prática longa</p></div>
+      <div class="card accent"><strong>🧠 Domingo</strong><p>Error Log + revisão</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Visão de 8 semanas</h3>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">
+      <button class="btn sm" onclick="showWeek(1)">Semana 1</button>
+      <button class="btn sm" onclick="showWeek(2)">Semana 2</button>
+      <button class="btn sm" onclick="showWeek(3)">Semana 3</button>
+      <button class="btn sm" onclick="showWeek(4)">Semana 4</button>
+      <button class="btn sm" onclick="showWeek(5)">Semana 5</button>
+      <button class="btn sm" onclick="showWeek(6)">Semana 6</button>
+      <button class="btn sm" onclick="showWeek(7)">Semana 7</button>
+      <button class="btn sm" onclick="showWeek(8)">Semana 8</button>
+    </div>
+    <div id="weekCal"></div>
+  </div>
+</section>
+
+<!-- ============ SIMULADOS ============ -->
+<section class="page" id="simulados">
+  <div class="page-head">
+    <div>
+      <div class="page-title">Simulados <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+      <div class="crumb">Bluebook · Simulados oficiais</div>
+    </div>
+  </div>
+
+  <div class="card hero">
+    <div class="corner-butterfly tr"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+    <h3>🔥 Simulados oficiais</h3>
+    <p style="margin:10px 0">Use o <strong>Bluebook</strong> para os simulados oficiais do College Board.</p>
+    <div class="grid grid-2" style="margin-top:14px">
+      <div class="card accent">
+        <h4>Semana 6 — Sábado</h4>
+        <p>Simulação parcial: RW Module 1, RW Module 2 ou Math Module 1 — OU Math completo.</p>
+      </div>
+      <div class="card accent">
+        <h4>Semana 7 — Sábado</h4>
+        <p>🔥 <strong>SIMULADO COMPLETO BLUEBOOK</strong></p>
+      </div>
+      <div class="card accent">
+        <h4>Semana 8 — Sábado</h4>
+        <p>🔥 <strong>SIMULADO FINAL</strong></p>
+      </div>
+      <div class="card gold">
+        <h4>Depois do simulado</h4>
+        <p>Domingo: análise completa — registrar todos os erros no Error Log.</p>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <h4 style="color:var(--navy)">Registrar resultado de simulado</h4>
+    <div class="grid grid-3" style="margin-top:10px">
+      <div class="form-row"><label>Data</label><input id="sDate" type="date"></div>
+      <div class="form-row"><label>R&W</label><input id="sRW" type="number" placeholder="300-800"></div>
+      <div class="form-row"><label>Math</label><input id="sMath" type="number" placeholder="300-800"></div>
+    </div>
+    <button class="btn primary" onclick="addSim()">✨ Registrar simulado</button>
+    <div id="simList" style="margin-top:16px"></div>
+  </div>
+</section>
+
+<!-- ============ PROGRESS ============ -->
+<section class="page" id="progress">
+  <div class="page-head">
+    <div>
+      <div class="page-title">MEU PROGRESSO <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+      <div class="crumb">Indicadores reais de evolução</div>
+    </div>
+  </div>
+
+  <div class="card hero" style="margin-bottom:22px">
+    <p class="quote">Não medir progresso apenas por: “Quantas questões acertei?”</p>
+  </div>
+
+  <div class="card">
+    <h3>Indicadores</h3>
+    <table style="margin-top:14px">
+      <thead><tr><th>Indicador</th><th>Objetivo</th><th>Progresso</th></tr></thead>
+      <tbody id="indTable"></tbody>
+    </table>
+  </div>
+
+  <div class="grid grid-3" style="margin-top:22px" id="indCircles"></div>
+</section>
+
+<!-- ============ MATERIALS ============ -->
+<section class="page" id="materials">
+  <div class="page-head">
+    <div>
+      <div class="page-title">MEUS MATERIAIS <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+      <div class="crumb">Os três pilares da sua preparação</div>
+    </div>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card accent">
+      <div class="corner-butterfly tr" style="width:70px"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+      <h3>1. Bluebook</h3>
+      <p style="margin:10px 0"><strong>Para os simulados oficiais.</strong></p>
+      <p>Aplicativo oficial do College Board onde você faz os simulados no formato exato do teste real.</p>
+    </div>
+    <div class="card blue">
+      <h3>2. Khan Academy</h3>
+      <p style="margin:10px 0"><strong>Para aprender/revisar conteúdo.</strong></p>
+      <p>Parceiro oficial do College Board — lições gratuitas, exercícios e relatórios personalizados.</p>
+    </div>
+    <div class="card gold">
+      <h3>3. Student Question Bank</h3>
+      <p style="margin:10px 0"><strong>Para atacar exatamente suas fraquezas.</strong></p>
+      <p>Banco de questões do College Board com filtros por seção, domínio, habilidade e dificuldade.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:22px">
+    <p class="quote">“O próprio College Board recomenda usar os resultados dos simulados para direcionar a prática e permite filtrar questões do Student Question Bank por seção, domínio, habilidade e dificuldade.”</p>
+  </div>
+</section>
+
+<!-- ============ FOCUS ============ -->
+<section class="page" id="focus">
+  <div class="page-head">
+    <div>
+      <div class="page-title">MEU FOCO <span class="hero-butterfly"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></span></div>
+      <div class="crumb">Estratégia personalizada</div>
+    </div>
+  </div>
+
+  <div class="card hero" style="margin-bottom:22px">
+    <p class="quote">“Eu não faria você estudar Math e English de maneira igualzinha.”</p>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card blue">
+      <div class="corner-butterfly tl" style="width:80px"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+      <h3>🧮 MATH</h3>
+      <p style="margin:10px 0">Você precisa:</p>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:8px 0;border-bottom:1px dashed var(--border)">✦ Consolidar vários tópicos</li>
+        <li style="padding:8px 0;border-bottom:1px dashed var(--border)">✦ Melhorar aplicação</li>
+        <li style="padding:8px 0">✦ Melhorar interpretação</li>
+      </ul>
+    </div>
+    <div class="card accent">
+      <div class="corner-butterfly tr" style="width:80px"><svg viewBox="0 0 200 160"><use href="#butterfly"/></svg></div>
+      <h3>📖 READING & WRITING</h3>
+      <p style="margin:10px 0">Foco em:</p>
+      <ul style="list-style:none;padding:0">
+        <li style="padding:8px 0;border-bottom:1px dashed var(--border)">✦ Vocabulário</li>
+        <li style="padding:8px 0;border-bottom:1px dashed var(--border)">✦ Compreensão das alternativas</li>
+        <li style="padding:8px 0">✦ Padrões de questões</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card gold" style="margin-top:22px">
+    <h3>🎯 MEU TREINAMENTO</h3>
+    <div class="flow" style="margin:20px 0">
+      <div class="step">Diagnóstico</div><span class="arrow">→</span>
+      <div class="step">Fechar lacunas</div><span class="arrow">→</span>
+      <div class="step">Treino direcionado</div><span class="arrow">→</span>
+      <div class="step">Velocidade</div><span class="arrow">→</span>
+      <div class="step">Simulados</div><span class="arrow">→</span>
+      <div class="step">Revisão dos erros</div>
+    </div>
+    <div class="divider"></div>
+    <p class="quote">“Você não precisa tentar aprender todo o inglês em dois meses.”</p>
+    <p class="quote">“O SAT tem padrões muito repetitivos.”</p>
+    <p class="quote">“Aprender o tipo de questão → reconhecer o padrão → aplicar o método → revisar o erro → repetir.”</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- ========== MOBILE NAV ========== -->
+<nav class="mobile-nav">
+  <a href="#" data-page="dashboard" class="active"><span class="ic">🏠</span>Home</a>
+  <a href="#" data-page="english"><span class="ic">📖</span>English</a>
+  <a href="#" data-page="math"><span class="ic">🧮</span>Math</a>
+    <a href="#" data-page="errorlog"><span class="ic">📓</span>Log</a>
+  <a href="#" data-page="calendar"><span class="ic">📅</span>Cal</a>
+  <a href="#" data-page="progress"><span class="ic">📊</span>Prog</a>
+</nav>
+
+<script>
+/* ============ NAV ============ */
+document.querySelectorAll('[data-page]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const p=a.dataset.page;
+    document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+    document.getElementById(p).classList.add('active');
+    document.querySelectorAll('[data-page]').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll(`[data-page="${p}"]`).forEach(x=>x.classList.add('active'));
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* ============ TABS ============ */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(x=>x.classList.add('hidden'));
+    document.getElementById('tab-'+t.dataset.tab).classList.remove('hidden');
+  });
+});
+
+/* ============ TRANSITIONS FLASHCARDS ============ */
+const transitions=[
+  {w:'however',m:'contudo, porém — contraste'},
+  {w:'therefore',m:'portanto — conclusão'},
+  {w:'moreover',m:'ademais — adição'},
+  {w:'furthermore',m:'além disso — adição'},
+  {w:'nevertheless',m:'não obstante — contraste'},
+  {w:'consequently',m:'consequentemente — causa/efeito'},
+  {w:'similarly',m:'similarmente — comparação'},
+  {w:'instead',m:'em vez disso — substituição'},
+  {w:'although',m:'embora — concessão'},
+  {w:'meanwhile',m:'enquanto isso — tempo'},
+  {w:'specifically',m:'especificamente — detalhe'},
+  {w:'for example',m:'por exemplo — ilustração'}
+];
+const tg=document.getElementById('transGrid');
+transitions.forEach(t=>{
+  const d=document.createElement('div');
+  d.className='flash';
+  d.innerHTML=`<div class="flash-inner"><div class="flash-face flash-front"><div class="word">${t.w}</div><div class="phon" style="margin-top:10px;font-size:.85rem">clique para ver</div></div><div class="flash-face flash-back"><div class="meaning">${t.m}</div></div></div>`;
+  d.addEventListener('click',()=>d.classList.toggle('flipped'));
+  tg.appendChild(d);
+});
+
+/* ============ GRAMMAR ============ */
+const grammar=[
+  {t:'Vírgulas',d:'Separação de itens, apostos, vocativos e orações independentes com conjunção.'},
+  {t:'Ponto e vírgula',d:'Une duas orações independentes relacionadas; antes de conjuntivos como "however".'},
+  {t:'Dois-pontos',d:'Introduz lista, explicação ou ênfase. A parte anterior deve ser frase completa.'},
+  {t:'Apóstrofo',d:'Posse (Sarah\'s book) e contrações (it\'s = it is). Cuidado: its ≠ it\'s.'},
+  {t:'Concordância',d:'Sujeito e verbo devem concordar em número. Atenção a frases com "of" no meio.'},
+  {t:'Verbos',d:'Tempo verbal consistente ao longo do texto. Evite misturar passado e presente sem motivo.'},
+  {t:'Frases completas',d:'Toda oração precisa de sujeito + verbo + ideia completa.'},
+  {t:'Fragments',d:'Frases incompletas tratadas como completas — erro comum no SAT.'},
+  {t:'Modifiers',d:'O modificador deve ficar perto do que modifica. Cuidado com dangling modifiers.'}
+];
+const gg=document.getElementById('gramGrid');
+grammar.forEach(g=>{
+  const d=document.createElement('div');
+  d.className='card accent';
+  d.innerHTML=`<strong style="color:var(--rose-dark)">${g.t}</strong><p style="margin-top:6px">${g.d}</p>`;
+  gg.appendChild(d);
+});
+
+/* ============ SAT CORE FLASHCARDS ============ */
+const satCore=[
+  ['compelling','convincente; persuasivo'],['significant','significativo; importante'],['substantial','considerável; substancial'],['relevant','relevante; pertinente'],['apparent','aparente; evidente'],['ambiguous','ambíguo; com mais de uma interpretação'],['consistent','consistente; coerente'],['contradict','contradizer; entrar em conflito'],['indicate','indicar; mostrar'],['imply','dar a entender; implicar'],
+  ['demonstrate','demonstrar; mostrar com evidência'],['establish','estabelecer; comprovar'],['support','apoiar; sustentar'],['undermine','enfraquecer; minar'],['reinforce','reforçar'],['derive','derivar; obter de uma fonte'],['obtain','obter; conseguir'],['retain','reter; manter'],['alter','alterar; modificar'],['enhance','melhorar; intensificar'],
+  ['infer','inferir; concluir a partir de evidências'],['assert','afirmar; declarar'],['claim','afirmação; alegação'],['evidence','evidência'],['reasoning','raciocínio'],['premise','premissa; ideia que sustenta um argumento'],['conclusion','conclusão'],['inference','inferência'],['justify','justificar'],['evaluate','avaliar'],
+  ['assess','avaliar; examinar'],['interpret','interpretar'],['analyze','analisar'],['examine','examinar'],['identify','identificar'],['determine','determinar'],['emphasize','enfatizar'],['illustrate','ilustrar; exemplificar'],['characterize','caracterizar'],['distinguish','distinguir'],
+  ['constitute','constituir; formar'],['correspond','corresponder'],['formulate','formular'],['modify','modificar'],['represent','representar'],['prevalent','predominante; comum'],['prominent','proeminente; de destaque'],['notable','notável; digno de nota'],['considerable','considerável'],['widespread','generalizado; disseminado'],
+  ['conventional','convencional'],['precise','preciso'],['tentative','provisório; não definitivo'],['explicit','explícito; declarado diretamente'],['implicit','implícito; não declarado diretamente'],['crucial','crucial; essencial'],['fundamental','fundamental'],['controversial','controverso'],['plausible','plausível'],['valid','válido; bem fundamentado'],
+  ['however','porém; contudo — contraste'],['therefore','portanto — conclusão'],['moreover','além disso — adição'],['furthermore','além disso — adição'],['nevertheless','mesmo assim; contudo — contraste'],['consequently','consequentemente — resultado'],['similarly','da mesma forma — comparação'],['instead','em vez disso — substituição'],['although','embora — concessão'],['whereas','enquanto; ao passo que — contraste'],
+  ['likewise','da mesma forma — comparação'],['in contrast','em contraste — diferença'],['in addition','além disso — adição'],['for example','por exemplo — ilustração'],['specifically','especificamente — detalhe'],['meanwhile','enquanto isso — tempo'],['as a result','como resultado — efeito'],['in other words','em outras palavras — reformulação'],['in particular','em particular — especificação'],['despite','apesar de — contraste/concessão'],
+  ['cause','causa'],['effect','efeito'],['consequence','consequência'],['contribute','contribuir'],['influence','influenciar'],['affect','afetar'],['stem from','originar-se de'],['result in','resultar em'],['lead to','levar a; resultar em'],['account for','explicar; representar uma parte de'],
+  ['increase','aumentar; aumento'],['decrease','diminuir; diminuição'],['decline','diminuir; declínio'],['rise','subir; aumento'],['fluctuate','oscilar'],['remain','permanecer'],['shift','mudar; deslocar'],['transform','transformar'],['expand','expandir'],['diminish','diminuir; reduzir'],
+  ['approximately','aproximadamente'],['quantity','quantidade'],['value','valor'],['rate','taxa; razão por unidade'],['ratio','razão'],['proportion','proporção'],['sum','soma'],['product','produto'],['factor','fator'],['multiple','múltiplo'],
+  ['average','média'],['mean','média aritmética'],['median','mediana'],['range','amplitude; intervalo'],['probability','probabilidade'],['sample','amostra'],['population','população'],['distribution','distribuição'],['margin of error','margem de erro'],['scatterplot','gráfico de dispersão'],
+  ['slope','inclinação; coeficiente angular'],['intercept','intercepto'],['equation','equação'],['inequality','desigualdade'],['variable','variável'],['expression','expressão'],['function','função'],['coordinate','coordenada'],['estimate','estimar; estimativa'],['solve','resolver'],
+  ['area','área'],['perimeter','perímetro'],['volume','volume'],['circumference','circunferência'],['radius','raio'],['diameter','diâmetro'],['angle','ângulo'],['triangle','triângulo'],['adjacent','adjacente'],['respectively','respectivamente'],
+  ['above','acima'],['below','abaixo'],['between','entre'],['within','dentro de; no intervalo de'],['outside','fora de'],['opposite','oposto'],['across','do outro lado; através de'],['alongside','ao lado de'],['relative to','em relação a'],['located','localizado'],
+  ['equivalent','equivalente'],['proportional','proporcional'],['linear','linear'],['quadratic','quadrático'],['exponential','exponencial'],['constant','constante'],['coefficient','coeficiente'],['vertex','vértice'],['congruent','congruente'],['similar','semelhante'],
+  ['perpendicular','perpendicular'],['parallel','paralelo'],['hypotenuse','hipotenusa'],['factorial','fatorial'],['integer','inteiro'],['whole number','número inteiro não negativo'],['positive','positivo'],['negative','negativo'],['at least','pelo menos'],['at most','no máximo']
+];
+const satGrid=document.getElementById('satCoreGrid');
+if(satGrid) satCore.forEach(([w,m])=>{
+  const d=document.createElement('div'); d.className='flash';
+  d.style.height='170px';
+  d.innerHTML=`<div class="flash-inner"><div class="flash-face flash-front"><div class="word" style="font-size:1.35rem">${w}</div><div class="phon" style="margin-top:8px">clique para virar</div></div><div class="flash-face flash-back"><div class="meaning" style="font-size:.9rem">${m}</div></div></div>`;
+  d.addEventListener('click',()=>d.classList.toggle('flipped'));
+  satGrid.appendChild(d);
+});
+
+/* ============ ERROR LOG ============ */
+let errors=JSON.parse(localStorage.getItem('ssp_errors')||'[]');
+function saveErrors(){localStorage.setItem('ssp_errors',JSON.stringify(errors))}
+function addError(){
+  const e={
+    q:eQ.value,area:eArea.value,topic:eTopic.value,
+    err:eErr.value,type:eType.value,sol:eSol.value,rule:eRule.value,
+    date:new Date().toISOString()
+  };
+  if(!e.q)return alert('Informe o número da questão');
+  errors.push(e);saveErrors();renderErrors();
+  ['eQ','eTopic','eErr','eSol','eRule'].forEach(i=>document.getElementById(i).value='');
+  spawnReward();
+}
+function renderErrors(){
+  const c=document.getElementById('errorList');c.innerHTML='';
+  const fa=fArea.value,ft=fTopic.value.toLowerCase(),fty=fType.value,vw=fView.value;
+  let list=[...errors];
+  if(fa)list=list.filter(e=>e.area===fa);
+  if(ft)list=list.filter(e=>e.topic.toLowerCase().includes(ft));
+  if(fty)list=list.filter(e=>e.type.startsWith(fty));
+  if(vw==='recurrent'){
+    const count={};list.forEach(e=>{count[e.topic]=(count[e.topic]||0)+1});
+    const top=Object.entries(count).sort((a,b)=>b[1]-a[1]).slice(0,5).map(x=>x[0]);
+    list=list.filter(e=>top.includes(e.topic));
+  }
+  if(!list.length){c.innerHTML='<p style="text-align:center;color:var(--ink-soft);font-style:italic;padding:20px">Nenhum erro registrado ainda ✨</p>';return}
+  list.reverse().forEach(e=>{
+    const d=document.createElement('div');
+    d.className='error-card';
+    d.innerHTML=`
+      <div class="meta"><span class="chip">${e.area}</span><span class="chip blue">${e.topic}</span><span class="chip gold">${e.type}</span></div>
+      <h4>Questão #${e.q}</h4>
+      <div class="row"><strong>Erro:</strong><span>${e.err||'—'}</span></div>
+      <div class="row"><strong>Solução:</strong><span>${e.sol||'—'}</span></div>
+      <div class="row"><strong>Lembrar:</strong><span>${e.rule||'—'}</span></div>
+      <div style="margin-top:8px;text-align:right"><button class="btn sm" onclick="delErr(${errors.indexOf(e)})">remover</button></div>
+    `;
+    c.appendChild(d);
+  });
+}
+function delErr(i){errors.splice(i,1);saveErrors();renderErrors()}
+function reviewErrors(){spawnReward();alert('🦋 Hora de revisar! Volte aos erros recorrentes e refaça as questões.');}
+renderErrors();
+
+/* ============ CALENDAR ============ */
+const weekData={
+  1:{title:'Semana 1 — Álgebra + Reading & Writing',days:[
+    {d:'Seg',t:'Math: Álgebra básica, equações lineares, sistemas, desigualdades, porcentagem | R&W: Words in Context'},
+    {d:'Ter',t:'Math: Funções, gráficos, função linear, domínio/range, substituição | R&W: Information & Ideas'},
+    {d:'Qua',t:'Math: Advanced Math, quadráticas, fatoração, expoentes, radicais | R&W: Craft & Structure'},
+    {d:'Qui',t:'Math: Sistemas, equações quadráticas, manipulação algébrica | R&W: Grammar'},
+    {d:'Sex',t:'Math: Porcentagens, razão, unidades, estatística básica | R&W: Transitions'},
+    {d:'Sáb',t:'Math: 25–35 questões misturadas | R&W: prática mista de Reading & Writing'},
+    {d:'Dom',t:'Math: revisão dos erros | R&W: revisão dos erros e vocabulário'}
+  ]},
+  2:{title:'Semana 2 — Data, geometria, trigonometria + Reading & Writing',days:[
+    {d:'Seg',t:'Math: Média, mediana, probabilidade, tabelas, gráficos | R&W: Words in Context'},
+    {d:'Ter',t:'Math: Área, perímetro, volume, círculos | R&W: Information & Ideas'},
+    {d:'Qua',t:'Math: Triângulos, Pitágoras, semelhança | R&W: Craft & Structure'},
+    {d:'Qui',t:'Math: Trigonometria, seno, cosseno, tangente | R&W: Grammar + Transitions'},
+    {d:'Sex',t:'Math: Problemas contextualizados | R&W: leitura e questões mistas'},
+    {d:'Sáb',t:'Math: módulo cronometrado | R&W: prática cronometrada'},
+    {d:'Dom',t:'Math: revisão completa | R&W: revisão completa + Error Log'}
+  ]},
+  3:{title:'Semana 3 — Error Log Training',days:[
+    {d:'Seg',t:'Math — 30 questões + CORRIGIR TODAS + Registrar erro'},
+    {d:'Ter',t:'R&W — 25–30 questões, separar erros por categoria'},
+    {d:'Qua',t:'Math — FRAQUEZA PRINCIPAL'},
+    {d:'Qui',t:'R&W — FRAQUEZA PRINCIPAL'},
+    {d:'Sex',t:'Mixed: 20 Math + 20 R&W cronometrado'},
+    {d:'Sáb',t:'Simulação parcial (RW M1/M2 ou Math M1)'},
+    {d:'Dom',t:'Revisão — nada de conteúdo novo'}
+  ]},
+  4:{title:'Semana 4 — Consolidar',days:[
+    {d:'Seg',t:'Math — 30 questões + Error Log'},
+    {d:'Ter',t:'R&W — 25–30 questões + Error Log'},
+    {d:'Qua',t:'Math — fraqueza principal'},
+    {d:'Qui',t:'R&W — fraqueza principal'},
+    {d:'Sex',t:'Mixed cronometrado'},
+    {d:'Sáb',t:'Simulação parcial'},
+    {d:'Dom',t:'Revisão completa'}
+  ]},
+  5:{title:'Semana 5 — Velocidade',days:[
+    {d:'Seg',t:'Math cronometrado — foco em tempo por questão'},
+    {d:'Ter',t:'R&W cronometrado — 1:11 por questão'},
+    {d:'Qua',t:'Math — fraquezas + velocidade'},
+    {d:'Qui',t:'R&W — fraquezas + velocidade'},
+    {d:'Sex',t:'Mixed cronometrado'},
+    {d:'Sáb',t:'Simulação parcial'},
+    {d:'Dom',t:'Error Log + revisão'}
+  ]},
+  6:{title:'Semana 6 — Velocidade avançada',days:[
+    {d:'Seg',t:'Math — questões difíceis cronometradas'},
+    {d:'Ter',t:'R&W — questões difíceis cronometradas'},
+    {d:'Qua',t:'Math — fraquezas persistentes'},
+    {d:'Qui',t:'R&W — vocabulário + grammar'},
+    {d:'Sex',t:'Mixed cronometrado'},
+    {d:'Sáb',t:'🔥 Simulação parcial ou Math completo'},
+    {d:'Dom',t:'Revisão completa'}
+  ]},
+  7:{title:'Semana 7 — Simulação real',days:[
+    {d:'Seg',t:'Revisão Math'},
+    {d:'Ter',t:'Revisão R&W'},
+    {d:'Qua',t:'Questões difíceis'},
+    {d:'Qui',t:'Error Log'},
+    {d:'Sex',t:'Revisão de vocabulário'},
+    {d:'Sáb',t:'🔥 SIMULADO COMPLETO BLUEBOOK'},
+    {d:'Dom',t:'Análise completa'}
+  ]},
+  8:{title:'Semana 8 — Final',days:[
+    {d:'Seg',t:'Math — erros recorrentes'},
+    {d:'Ter',t:'R&W — erros recorrentes'},
+    {d:'Qua',t:'Vocabulary + Grammar'},
+    {d:'Qui',t:'Math difícil'},
+    {d:'Sex',t:'Revisão leve'},
+    {d:'Sáb',t:'🔥 SIMULADO FINAL'},
+    {d:'Dom',t:'Análise'}
+  ]}
+};
+function showWeek(n){
+  const w=weekData[n];
+  const c=document.getElementById('weekCal');
+  c.innerHTML=`<h4 style="color:var(--rose-dark);margin-bottom:12px">${w.title}</h4>
+    <div class="cal">
+      ${['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'].map(d=>`<div class="dow">${d}</div>`).join('')}
+      ${w.days.map(d=>`<div class="cell"><div class="num">${d.d}</div><div class="task">${d.t}</div></div>`).join('')}
+    </div>`;
+}
+showWeek(1);
+
+/* ============ SIMULADOS ============ */
+let sims=JSON.parse(localStorage.getItem('ssp_sims')||'[]');
+function saveSims(){localStorage.setItem('ssp_sims',JSON.stringify(sims))}
+function addSim(){
+  const s={date:sDate.value,rw:+sRW.value,math:+sMath.value,total:(+sRW.value||0)+(+sMath.value||0)};
+  if(!s.date||!s.rw||!s.math)return alert('Preencha todos os campos');
+  sims.push(s);saveSims();renderSims();
+  sDate.value='';sRW.value='';sMath.value='';
+  spawnReward();
+}
+function renderSims(){
+  const c=document.getElementById('simList');
+  if(!sims.length){c.innerHTML='<p style="color:var(--ink-soft);font-style:italic">Nenhum simulado registrado ainda.</p>';return}
+  c.innerHTML='<table><thead><tr><th>Data</th><th>R&W</th><th>Math</th><th>Total</th></tr></thead><tbody>'+
+    sims.slice().reverse().map(s=>`<tr><td>${s.date}</td><td>${s.rw}</td><td>${s.math}</td><td><strong style="color:var(--navy)">${s.total}</strong></td></tr>`).join('')+
+    '</tbody></table>';
+}
+renderSims();
+
+/* ============ PROGRESS INDICATORS ============ */
+const indicators=[
+  {k:'Questões fáceis',o:'95%+',v:70,c:'rose'},
+  {k:'Questões médias',o:'80–90%+',v:55,c:'blue'},
+  {k:'Questões difíceis',o:'melhorar continuamente',v:30,c:'gold'},
+  {k:'Erros por distração',o:'próximo de 0',v:85,c:'rose'},
+  {k:'Questões em branco',o:'0',v:100,c:'blue'},
+  {k:'Tempo dentro do módulo',o:'dentro do tempo',v:60,c:'gold'},
+  {k:'Erros repetidos',o:'0',v:75,c:'rose'}
+];
+const it=document.getElementById('indTable');
+it.innerHTML=indicators.map(i=>`<tr>
+  <td><strong>${i.k}</strong></td>
+  <td style="color:var(--ink-soft)">${i.o}</td>
+  <td style="width:40%"><div class="progress ${i.c}"><span style="width:${i.v}%"></span></div><div style="font-size:.75rem;color:var(--ink-soft);margin-top:3px">${i.v}% do objetivo</div></td>
+</tr>`).join('');
+
+const ic=document.getElementById('indCircles');
+ic.innerHTML=indicators.slice(0,3).map(i=>`
+  <div class="card" style="text-align:center">
+    <div class="circle-progress" style="margin:0 auto">
+      <svg width="110" height="110">
+        <circle cx="55" cy="55" r="48" stroke="#f4e7ec" stroke-width="8" fill="none"/>
+        <circle cx="55" cy="55" r="48" stroke="${i.c==='rose'?'#8a4a5e':i.c==='blue'?'#3a78a8':'#c9a961'}" stroke-width="8" fill="none" stroke-dasharray="301" stroke-dashoffset="${301-(301*i.v/100)}" stroke-linecap="round"/>
+      </svg>
+      <div class="value">${i.v}%</div>
+    </div>
+    <div style="margin-top:10px;font-weight:500;color:var(--navy)">${i.k}</div>
+    <div style="font-size:.8rem;color:var(--ink-soft)">${i.o}</div>
+  </div>
+`).join('');
+
+/* ============ REWARD BUTTERFLY ============ */
+function spawnReward(){
+  const b=document.createElement('div');
+  b.className='reward';
+  b.style.left=(window.innerWidth/2-30)+'px';
+  b.style.top=(window.innerHeight/2)+'px';
+  b.style.width='60px';
+  b.innerHTML='<svg viewBox="0 0 200 160"><use href="#butterfly"/></svg>';
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),2100);
+}
+
+/* ============ TASK COMPLETION (dashboard quick) ============ */
+document.addEventListener('click',e=>{
+  if(e.target.matches('.task-check')){
+    e.target.classList.toggle('done');
+    if(e.target.classList.contains('done'))spawnReward();
+  }
+});
+</script>
+</body>
+</html>
+```
